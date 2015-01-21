@@ -1,0 +1,14 @@
+<p id="notice"><%= notice %></p>
+
+<p><%= @user.screenname %></p>
+
+<p><%= @user.name %></p>
+
+<p><%= @user.location %></p>
+
+<p><%= @user.age %></p>
+<small><%= time_ago_in_words(@user.created_at) %></small>
+
+
+<%= link_to 'Edit', edit_user_path(@user) %> |
+<%= link_to 'Back', users_path %>
