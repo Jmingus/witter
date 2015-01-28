@@ -14,3 +14,13 @@
 //= require jquery_ujs
 //= require turbolinks
 //= require_tree .
+
+$(document).ready(function () {
+    $("#new_wit").on("ajax:success", function(e, data, status, xhr) {
+        $("#new_wit").append(status)
+        $('#wit-container').append("<p>" + data["message"] + "</p>")
+          // + "<p>" + data["created_at"] "</p>")
+    }).on("ajax:error", function(e, xhr, status, error) {
+        $("#new_wit_message").append("<p>ERROR</p>")
+    });
+});

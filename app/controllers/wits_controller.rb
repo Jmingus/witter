@@ -5,6 +5,7 @@ class WitsController < ApplicationController
   # GET /wits.json
   def index
     @wits = Wit.all
+    @wit = Wit.new
   end
 
   # GET /wits/1
@@ -26,11 +27,13 @@ class WitsController < ApplicationController
   def create
     @wit = Wit.new(wit_params)
 
-    respond_to do |format|
       if @wit.save
-        format.html { redirect_to @wit, notice: 'Wit was successfully created.' }
-        format.json { render :show, status: :created, location: @wit }
+      respond_to do |format|
+        format.json { render json: @wit, status: :created, message: "Success!" }
+        format.html { redirect_to wits_path, notice: 'Successfully Created!' }
+      end
       else
+      respond_to do |format|
         format.html { render :new }
         format.json { render json: @wit.errors, status: :unprocessable_entity }
       end
@@ -69,6 +72,6 @@ class WitsController < ApplicationController
 
     # Never trust parameters from the scary internet, only allow the white list through.
     def wit_params
-      params[:wit].permit(:message)
+      params[:wit].permit(:message, :created_at)
     end
 end
